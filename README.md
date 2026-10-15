@@ -1,54 +1,43 @@
 # คำอธิบายข้อมูล (Data Description)
 
-โฟลเดอร์นี้อธิบายข้อมูลที่ใช้ในโครงงาน **IT Salary Analysis**
+โฟลเดอร์นี้อธิบายข้อมูลที่ใช้ในโครงงาน **Water Balance Analysis and Drought Risk Assessment in Fruit Orchards Based on Meteorological and Soil Moisture Data**
 
 ## 1. แหล่งที่มาและสิทธิ์การใช้ข้อมูล
 
 | หัวข้อ | รายละเอียด |
 | --- | --- |
-| ชื่อชุดข้อมูล | IT Salary Survey EU 2020 |
-| แหล่งที่มาเดิม | https://www.kaggle.com/datasets/parulpandey/2020-it-salary-survey-for-eu-region |
-| ประเภทข้อมูล | ข้อมูลแบบสำรวจที่ผู้ตอบรายงานเอง (self-reported) 1 แถวต่อผู้ตอบ 1 คน |
+| ชื่อชุดข้อมูล | ERA5_orchard_12.6510N_102.2128E_2020-2026_hourly |
+| แหล่งที่มาเดิม | https://cds.climate.copernicus.eu/first-access?redirectTo=%2Fdatasets%2Freanalysis-era5-single-levels%3Ftab%3Doverview |
+| ประเภทข้อมูล | ข้อมูลรีแอนาไลซิส (Reanalysis Data) รายชั่วโมงที่มีลักษณะ 1 แถวต่อ 1 ชั่วโมง |
 
 ## 2. ไฟล์ในโฟลเดอร์นี้
 
 | ตำแหน่งไฟล์ | คำอธิบาย |
 | --- | --- |
-| `data/raw/it_salary.csv` | ไฟล์ดิบตามที่ดาวน์โหลดมา **ห้ามแก้ไขด้วยมือ** มี 1,253 แถว 23 คอลัมน์ (รวมคอลัมน์ Timestamp ในไฟล์ที่ตรวจ) |
-| `data/processed/salary_clean.csv` | ข้อมูลที่ล้างแล้ว 1,186 แถว 25 คอลัมน์ **สร้างจาก** `code/01_clean_data.py`  |
+| `d:\Project\Data\raw\ERA5_orchard_12.6510N_102.2128E_2020-2026_hourly.csv` | ไฟล์ดิบตามที่ดาวน์โหลดมา **ห้ามแก้ไขด้วยมือ** ไฟล์ CSV ดิบ 59,016 แถว 25 คอลัม|
+| `d:\Project\Data\process\daily_clean.csv` | ข้อมูลที่ล้างแล้ว 2459 แถว 12 คอลัมน์ **สร้างจาก** `d:\Project\code\water_01_clean.ipynb`  |
 
-วิธีสร้างไฟล์ที่ประมวลผลแล้วขึ้นใหม่: วางไฟล์ดิบที่ `data/raw/it_salary.csv` แล้วรัน python `code/01_clean_data.py`
+วิธีสร้างไฟล์ที่ประมวลผลแล้วขึ้นใหม่: วางไฟล์ดิบที่ `d:\Project\Data\raw\ERA5_orchard_12.6510N_102.2128E_2020-2026_hourly.csv` แล้วรัน python `d:\Project\code\water_01_clean.ipynb`
 
 
-## 3. พจนานุกรมข้อมูล (Data Dictionary) ของ `salary_clean.csv`
+## 3. พจนานุกรมข้อมูล (Data Dictionary) ของ `daily_clean.csv`
 
 ข้อมูลหลังจากทำความสะอาดแล้วมีทั้งหมด 1,186 แถว ตารางต่อไปนี้แสดงชื่อคอลัมน์ ชนิดข้อมูล คำอธิบาย และจำนวนค่าว่างของแต่ละคอลัมน์
 
-| คอลัมน์ | ชื่อคอลัมน์เดิม | ชนิดข้อมูล | คำอธิบาย / ค่าที่เป็นไปได้ | ค่าว่าง |
+| คอลัมน์ | ชื่อคอลัมน์เดิม | ชนิดข้อมูล | คำอธิบาย / ค่าที่เป็นไปได้ | ค่าว่าง  |
 | --- | --- | --- | --- | ---: |
-| `age` | Age | ตัวเลข | อายุของผู้ตอบแบบสอบถาม หน่วยเป็นปี | 0 |
-| `gender` | Gender | ข้อความ | เพศของผู้ตอบแบบสอบถาม ได้แก่ Male, Female และ Diverse (กลุ่ม Diverse มี 2 รายการ) | 3 |
-| `city` | City | ข้อความ | เมืองที่ทำงาน ได้แก่ Berlin, Munich, Frankfurt และ Other | 0 |
-| `position` | Position | ข้อความ | ชื่อตำแหน่งงานที่ผู้ตอบแบบสอบถามกรอกด้วยตนเอง มีทั้งหมด 135 รูปแบบ | 2 |
-| `exp_total_years` | Total years of experience | ตัวเลข | จำนวนปีของประสบการณ์ทำงานทั้งหมด | 0 |
-| `exp_germany_years` | Years of experience in Germany | ตัวเลข | จำนวนปีของประสบการณ์ทำงานในประเทศเยอรมนี | 44 |
-| `seniority` | Seniority level | ข้อความ | ระดับตำแหน่งงาน ได้แก่ Junior, Middle, Senior, Lead, Head และ Other | 0 |
-| `main_tech` | Your main technology / programming language | ข้อความ | เทคโนโลยีหรือภาษาโปรแกรมหลักที่ใช้งาน กรอกด้วยตนเองและอาจมีรูปแบบการสะกดต่างกัน เช่น Python และ python | 109 |
-| `other_tech` | Other technologies/programming languages you use often | ข้อความ | เทคโนโลยีหรือภาษาโปรแกรมอื่น ๆ ที่ใช้งานเป็นประจำ โดยอาจมีหลายรายการในหนึ่งช่อง | 141 |
-| `salary_eur` | Yearly brutto salary (without bonus and stocks) in EUR | ตัวเลข | เงินเดือนรวมก่อนหักภาษีต่อปี ไม่รวมโบนัสและหุ้น หน่วยเป็นยูโร เป็นตัวแปรตามหลักสำหรับการวิเคราะห์ | 0 |
-| `bonus_eur` | Yearly bonus + stocks in EUR | ตัวเลข | มูลค่าโบนัสและหุ้นที่ได้รับต่อปี หน่วยเป็นยูโร | 396 |
-| `salary_prev_year_eur` | Annual brutto salary ... one year ago (only if staying in the same country) | ตัวเลข | เงินเดือนรวมก่อนหักภาษีต่อปีของปีก่อนหน้า สำหรับผู้ที่ยังทำงานอยู่ในประเทศเดิม หน่วยเป็นยูโร | 333 |
-| `bonus_prev_year_eur` | Annual bonus+stocks one year ago (only if staying in the same country) | ตัวเลข | มูลค่าโบนัสและหุ้นที่ได้รับในปีก่อนหน้า สำหรับผู้ที่ยังทำงานอยู่ในประเทศเดิม หน่วยเป็นยูโร | 590 |
-| `vacation_days` | Number of vacation days | ตัวเลข | จำนวนวันลาพักร้อนต่อปี | 66 |
-| `employment_status` | Employment status | ข้อความ | สถานะการทำงาน ได้แก่ Full-time employee, Self-employed (freelancer), Part-time employee, Founder, Working student และ Other | 11 |
-| `contract_duration` | Contract duration | ข้อความ | ประเภทสัญญาจ้าง ได้แก่ Unlimited contract (สัญญาไม่มีกำหนดระยะเวลา) และ Temporary contract (สัญญาชั่วคราว) | 22 |
-| `work_language` | Main language at work | ข้อความ | ภาษาหลักที่ใช้ในการทำงาน ได้แก่ English, German, Russian และ Other | 10 |
-| `company_size` | Company size | ข้อความ | ขนาดบริษัทตามจำนวนพนักงาน ได้แก่ up to 10, 11-50, 51-100, 101-1000 และ 1000+ | 8 |
-| `company_type` | Company type | ข้อความ | ประเภทบริษัท ได้แก่ Product, Startup, Consulting / Agency และ Other | 15 |
-
-**หมายเหตุ**
-- จำนวนค่าว่าง (Missing Values) นับจากข้อมูลหลังทำความสะอาดแล้ว จำนวน 1,186 แถว
+| `time_local` | time_local | วันที่ | วันที่ตามเวลาท้องถิ่น 1 แถวต่อ 1 วัน เป็น index ของข้อมูลรายวัน ช่วง 2020 ถึง ก.ย. 2026 | 0 |
+| `rain` | precipitation | ตัวเลข | ปริมาณฝนรวมต่อวัน หน่วย mm/day การกระจายเบ้ขวา (ค่าเฉลี่ย 7.82, มัธยฐาน 4.30) | 0 |
+| `et0` | et0_fao_evapotranspiration | ตัวเลข | การคายระเหยอ้างอิงรายวัน (ET0) รวมจากรายชั่วโมงเป็นรายวัน หน่วย mm/day เป็นตัวแปรตามหลัก | 0 |
+| `tmean` | temperature_2m | ตัวเลข | อุณหภูมิอากาศเฉลี่ยรายวันที่ 2 เมตร หน่วย °C | 0 |
+| `tmax` | temperature_2m | ตัวเลข | อุณหภูมิอากาศสูงสุดรายวันที่ 2 เมตร หน่วย °C | 0 |
+| `tmin` | temperature_2m | ตัวเลข | อุณหภูมิอากาศต่ำสุดรายวันที่ 2 เมตร หน่วย °C | 0 |
+| `vpd` | vapour_pressure_deficit | ตัวเลข | ส่วนต่างความดันไอน้ำ ค่าเฉลี่ยรายวัน หน่วย kPa ยิ่งสูงอากาศยิ่งแห้ง | 0 |
+| `rh` | relative_humidity_2m | ตัวเลข | ความชื้นสัมพัทธ์ที่ 2 เมตร ค่าเฉลี่ยรายวัน หน่วย % สัมพันธ์กับ vpd สูงมาก (Spearman −0.99) | 0 |
+| `rad` | shortwave_radiation | ตัวเลข | รังสีคลื่นสั้น ค่าเฉลี่ยรายวัน หน่วย W/m² เป็นตัวแปรที่อธิบาย ET0 ได้มากที่สุด | 0 |
+| `cloud` | cloud_cover | ตัวเลข | ปริมาณเมฆ ค่าเฉลี่ยรายวัน หน่วย % | 0 |
+| `wind` | wind_speed_10m | ตัวเลข | ความเร็วลมที่ 10 เมตร ค่าเฉลี่ยรายวัน หน่วย ⚠ (km/h หรือ m/s ตรวจจากไฟล์) | 0 |
+| `soil` | soil_moisture_0_to_7cm, soil_moisture_7_to_28cm | ตัวเลข | ความชื้นดินเชิงปริมาตร (m³/m³) คำนวณจากค่าเฉลี่ยของความชื้นดิน 2 ชั้น (0-7 ซม. และ 7-28 ซม.) แล้วรวมเป็นรายวัน ช่วงค่าประมาณ 0.27-0.50 ใช้ระบุวันเสี่ยงแล้งเมื่อต่ำกว่าเกณฑ์ P15 ของปี 2020-2024 | 0 |
+| `vpd_hours_high`| ไม่มี | ตัวเลข | มูลค่าโบนัสและหุ้นที่ได้รับในปีก่อนหน้า สำหรับผู้ที่ยังทำงานอยู่ในประเทศเดิม หน่วยเป็นยูโร | 0 |
 
 
-
-หน่วยของจำนวนเงินทั้งหมดคือยูโร (EUR) และเป็นเงินรวมก่อนหักภาษี (brutto)
